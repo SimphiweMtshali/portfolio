@@ -1,14 +1,16 @@
 {
   "files": {
     "main.css": "/portfolio/static/css/main.de3c3dcc.css",
-    "main.js": "/portfolio/static/js/main.888e9eb9.js",
+    "main.js": "/portfolio/static/js/main.dc6421f3.js",
+    "static/media/login-dashboard.png": "/portfolio/static/media/login-dashboard.aecb638faee51a6243d1.png",
+    "static/media/carhouse.png": "/portfolio/static/media/carhouse.b83308430a32eb948d55.png",
     "static/media/Gradpic.JPG": "/portfolio/static/media/Gradpic.148987a943b836a32ce3.JPG",
     "index.html": "/portfolio/index.html",
     "main.de3c3dcc.css.map": "/portfolio/static/css/main.de3c3dcc.css.map",
-    "main.888e9eb9.js.map": "/portfolio/static/js/main.888e9eb9.js.map"
+    "main.dc6421f3.js.map": "/portfolio/static/js/main.dc6421f3.js.map"
   },
   "entrypoints": [
     "static/css/main.de3c3dcc.css",
-    "static/js/main.888e9eb9.js"
+    "static/js/main.dc6421f3.js"
   ]
 }

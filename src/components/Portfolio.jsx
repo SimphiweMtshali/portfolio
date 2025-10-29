@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Code, User, Palette, Github, Linkedin, Menu, X, Download, ExternalLink, Mail, Instagram, Music } from 'lucide-react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import Lottie from 'lottie-react';
+import carHouseImg from '../assets/carhouse.png';
+import loginDashboardImg from '../assets/login-dashboard.png';
 
 export default function Portfolio() {
   const [loading, setLoading] = useState(true);
@@ -48,7 +50,7 @@ export default function Portfolio() {
       id: 1,
       title: 'Simphiwe-CarWeb',
       description: 'A responsive car showcase website built with modern web technologies, highlighting my skills in front-end development, clean UI design, and interactive user experiences.',
-      image: `${process.env.PUBLIC_URL}/carhouse.png`,
+      image: carHouseImg,
       tech: ['HTML5', 'CSS3', 'JavaScript', 'SGitHub Pages'],
       github: 'https://github.com/SimphiweMtshali/Simphiwe-CarWeb.git',
       demo: 'https://simphiwemtshali.github.io/Simphiwe-CarWeb/',
@@ -58,7 +60,7 @@ export default function Portfolio() {
       id: 2,
       title: 'Dashboard CRUD with Weather API',
       description: 'A full-stack React/PHP application combining secure task management with weather insights and JWT authentication.',
-      image: `${process.env.PUBLIC_URL}/login-dashboard.png`,
+      image: loginDashboardImg,
       tech: ['React', 'PHP', 'JWT', 'MySQL'],
       github: 'https://github.com/SimphiweMtshali/Data-Analytics-Dashboard.git',
       demo: 'https://simphiwemtshali.github.io/Data-Analytics-Dashboard/',
@@ -87,6 +89,25 @@ export default function Portfolio() {
     { category: 'Tools', techs: ['Git', 'Docker', 'VS Code', 'Figma'] },
     { category: 'Data Analytics', techs: ['Power BI', 'Tableau', 'Pandas', 'NumPy'] }
   ];
+
+  // Helper function to handle image paths for both localhost and GitHub Pages
+  const getImagePath = (imageName) => {
+    // If it's an absolute URL or data URL, return as is
+    if (imageName.startsWith('http') || imageName.startsWith('data:')) {
+      return imageName;
+    }
+    
+    // If it's a relative path starting with /, remove the leading slash
+    const cleanPath = imageName.startsWith('/') ? imageName.slice(1) : imageName;
+    
+    // In development (localhost), serve from the public folder root
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+      return '/' + cleanPath;
+    }
+    
+    // In production (GitHub Pages), use the full PUBLIC_URL path
+    return `${process.env.PUBLIC_URL}/${cleanPath}`;
+  };
 
   // Resolve image paths so that assets in `public/` (which are referenced like "/carhouse.png")
   // work correctly when the app is hosted under a subpath (GitHub Pages, e.g. /portfolio/).
@@ -345,7 +366,7 @@ export default function Portfolio() {
                 >
                   <div className="relative overflow-hidden">
                     <img
-                      src={resolveImage(project.image)}
+                      src={project.image}
                       alt={project.title}
                       className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
                     />
@@ -600,7 +621,7 @@ export default function Portfolio() {
           <div className="bg-gray-800 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-purple-500/30" onClick={(e) => e.stopPropagation()}>
               <div className="relative">
               <img
-                src={resolveImage(selectedProject.image)}
+                src={selectedProject.image}
                 alt={selectedProject.title}
                 className="w-full h-64 object-cover"
               />

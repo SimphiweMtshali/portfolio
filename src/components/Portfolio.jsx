@@ -88,6 +88,18 @@ export default function Portfolio() {
     { category: 'Data Analytics', techs: ['Power BI', 'Tableau', 'Pandas', 'NumPy'] }
   ];
 
+  // Resolve image paths so that assets in `public/` (which are referenced like "/carhouse.png")
+  // work correctly when the app is hosted under a subpath (GitHub Pages, e.g. /portfolio/).
+  // Also allow external URLs (http/https/data) to pass through unchanged.
+  const resolveImage = (img) => {
+    if (!img) return '';
+    if (typeof img !== 'string') return img; // already imported/required asset
+    if (img.startsWith('http') || img.startsWith('data:')) return img;
+    // leading slash points to the site root; use PUBLIC_URL so it includes the homepage base
+    if (img.startsWith('/')) return (process.env.PUBLIC_URL || '') + img;
+    return img;
+  };
+
   
   if (loading) {
     return (
@@ -333,7 +345,7 @@ export default function Portfolio() {
                 >
                   <div className="relative overflow-hidden">
                     <img
-                      src={project.image}
+                      src={resolveImage(project.image)}
                       alt={project.title}
                       className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
                     />
@@ -586,9 +598,9 @@ export default function Portfolio() {
       {selectedProject && (
         <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={() => setSelectedProject(null)}>
           <div className="bg-gray-800 rounded-2xl max-w-3xl w-full max-h-[90vh] overflow-y-auto border border-purple-500/30" onClick={(e) => e.stopPropagation()}>
-            <div className="relative">
+              <div className="relative">
               <img
-                src={selectedProject.image}
+                src={resolveImage(selectedProject.image)}
                 alt={selectedProject.title}
                 className="w-full h-64 object-cover"
               />
